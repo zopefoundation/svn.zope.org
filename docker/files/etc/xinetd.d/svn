@@ -1,0 +1,11 @@
+service svn
+{
+   socket_type     = stream
+   protocol        = tcp
+   wait            = no
+   user            = nobody
+   group           = zopesvn
+   server          = /usr/local/bin/svnserve
+   server_args     = -i
+   disable         = no
+} 

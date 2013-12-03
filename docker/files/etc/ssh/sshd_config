@@ -1,0 +1,13 @@
+Protocol 2
+SyslogFacility AUTHPRIV
+PermitRootLogin no
+PasswordAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+GSSAPIAuthentication yes
+GSSAPICleanupCredentials yes
+UsePAM yes
+#X11Forwarding yes
+X11Forwarding no
+X11DisplayOffset 10
+Subsystem sftp /usr/libexec/openssh/sftp-server

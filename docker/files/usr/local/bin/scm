@@ -1,0 +1,49 @@
+#!/usr/bin/python
+
+"""Dispatch to either CVS or Subversion, depending on $0.
+
+Unexpected $0 causes failure - so only CVS or subversion can be run."""
+
+import sys, os, re
+
+valid_scp_dest = re.compile('/distribution/?$').match
+def main():
+    args = sys.argv[1:]
+    if not args:
+        fail()
+    command = args[0]
+    extra = []
+    if command in ('cvs', 'vote'):
+        pass
+    elif command == 'svnserve':
+        extra = ['-r', '/svn']
+    elif command == 'scp':
+        if not (len(args) == 3
+                and args[1] == '-t'
+                and valid_scp_dest(args[2])
+                ):
+            fail()
+        args[2] = '/var/www/download.zope.org/distribution/'
+    else:
+        fail()
+    path = "/usr/bin/%s" % command
+    os.execl(path, path, *(extra + args[1:]))
+    # Testing:
+#    print "os.execl('%s', '%s', '%s')" % (path, path, args[1:])
+
+def fail():
+    print "Command not accepted"
+    sys.exit(1)
+
+def disabled():
+    print "CVS and SN access disabled while migrating to new machine, back soon"
+    sys.exit(1)
+
+if __name__ == "__main__":
+
+    try:
+        main()
+        #disabled()
+    except:
+        # We really REALLY want to be discreet.
+        fail()
