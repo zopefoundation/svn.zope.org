@@ -9,6 +9,7 @@ def c(command):
 os.mkdir('/var/run/sshd')
 c("/etc/init.d/sshd start")
 
+c("rm -rf /etc/httpd/conf.d/proxy_ajp.conf")
 c("sbo zc.zopeorgkeyupload svn")
 c("sbo zeo zaam")
 c("sbo zaamdashboard zope")
