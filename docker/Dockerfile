@@ -22,4 +22,5 @@ run /opt/cleanpython26/bin/python /setup.py
 
 volume ["/data", "/home"]
 expose 80 22 3690 2401
+cmd ["/start.sh"]
 
